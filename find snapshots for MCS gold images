@@ -1,0 +1,1 @@
+Get-ProvScheme -adminaddress DDC-machine-name | select ProvisioningSchemeName, masterimagevm
