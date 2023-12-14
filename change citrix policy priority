@@ -1,0 +1,6 @@
+#import the module on the DDC (download it from here or get it off the ISO/citrix website https://github.com/ryancbutler/Citrix/blob/master/XenDesktop/GPO/Citrix.GroupPolicy.Commands.psm1)
+"Import-Module .\Citrix.GroupPolicy.Commands.psm1"
+#set up a PSDrive  
+"New-PSDrive -PSProvider CitrixGroupPolicy -Name LocalFarmGPO -Root \ -Controller localhost"
+#edit the policy priority (user policies work too)
+Set-CtxGroupPolicy "policy" computer -Priority "2"
