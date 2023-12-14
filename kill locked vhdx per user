@@ -1,0 +1,9 @@
+#look across multiple file shares for stuck sessions
+$user = Read-Host -Prompt "Username to check"$hosts = @('Profile1','Profile2','FSLogix1')Foreach ($comp in $hosts){ 
+#connect to each server
+$session = new-pssession -ComputerName $comp
+    Invoke-command -script {
+#look for meta files that indicate a session lock and kill the session if it finds them        
+      Get-SmbOpenFile | Where-Object {($_.path -like "*_$using:user.vhdx") -or ($_.path -like "*_$using:user.*.meta")} | Close-SmbOpenFile -confirm:$false
+    } -session $session #-ArgumentList ($user)
+}
