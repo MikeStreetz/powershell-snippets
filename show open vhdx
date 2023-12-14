@@ -1,0 +1,4 @@
+#show me open VHDX files on a file server
+get-smbopenfile -cimsession ($Server = Read-Host -Prompt 'Input your server  name') | Where-Object -Property ShareRelativePath -Match ".VHDX" | select FileID, ClientUserName, Path | Sort-object -property ClientUserName
+#could alternately pipe to this istead to kill them all
+#Close-SmbOpenFile -confirm:$false
